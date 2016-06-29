@@ -1,0 +1,58 @@
+﻿@{
+    Layout = "~/_SiteLayout.cshtml";
+    var title = DAL.DbHelperSQLite.GetOneField("value", "SiteConfig", "key='站点名称'");
+
+    Page.Title = title + "经纪人风采";
+    //Layout = "在此处显示布局页";
+    //精品房源
+    var jingpin = new DAL.House().GetModelList(" Type='Rent' and JingPin='精品' order by id desc");
+
+    //房源列表
+    var house = new DAL.House().GetModelList(" Type='Rent' Order by id desc ");
+}
+
+<div id="fh5co-page-title" style="background-image: url(images/hero_2.jpg)">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="text">
+            <h1>@(title)经纪人风采</h1>
+        </div>
+    </div>
+</div>
+
+
+<main role="main" id="fh5co-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3" id="fh5co-sidebar">
+                <div class="fh5co-side-block" style="border:solid 1px #ccc;border-radius:4px;padding:10px 10px;">
+                    <h2>精品房源</h2>
+                    <div>
+                        @foreach (var j in jingpin)
+                        {
+                            <div style="text-align:center;margin:10px 0;">
+                                <div><a href="~/Company?ID=@j.ID"><img src="images/img_10.jpg" style="width:80%;padding:0;margin:0;" /></a></div>
+                                <a href="~/Company?ID=@j.ID">@j.Title</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9" id="fh5co-content">
+                <div class="row" style="padding:20px 0;border-bottom:dashed 1px #000000;">
+                    <div class="col-md-2">
+                        <img src="images/agentd.jpg" style="width:100%;padding:0;margin:auto;" />
+                    </div>
+                    <div class="col-md-7" style="line-height:30px;">
+                        <h4 style="margin-top:10px;">燕闪硕</h4>
+                        <span><strong>你的需求，就是我的目标，诚信，坚持不懈，为您找到最合适的家！</strong></span><br />
+                        <span class="broker-name">主营：星河盛世 长荣小区</span>
+                    </div>
+                    <div class="col-md-3" style="vertical-align:middle;">
+                        <span style="font-size:30px;color:#81c141;line-height:135px;">17769018325</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
