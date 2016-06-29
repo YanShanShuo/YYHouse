@@ -1,0 +1,200 @@
+﻿@{
+    Layout = "~/_SiteLayout.cshtml";
+
+    var title = DAL.DbHelperSQLite.GetOneField("value", "SiteConfig", "key='站点名称'");
+
+    Page.Title = title + "首页";
+
+    //DAL.DbHelperSQLite.CreatNewDB("heng.db");
+
+}
+
+
+<div id="fh5co-hero" style="background-image: url(images/hero_2.jpg)">
+    <a href="#fh5co-main" class="smoothscroll animated bounce fh5co-arrow"><i class="ti-angle-down"></i></a>
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="text" style="text-align:center;font-family:Microsoft YaHei;">
+                <h1 style="letter-spacing:30px;"><strong>@title</strong></h1>
+                <br />
+                <h3 style="color:white;">青县房地产领导者</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<main role="main" id="fh5co-main">
+    <section class="feature">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="icon ti-gift"></i></div>
+                        <div class="feature-text">
+                            <h2>买房</h2>
+                            <p>@Html.Raw(DAL.DbHelperSQLite.GetOneField("value", "SiteConfig", "key='买房简介'"))</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="icon ti-heart"></i></div>
+                        <div class="feature-text">
+                            <h2>租房</h2>
+                            <p>@Html.Raw(DAL.DbHelperSQLite.GetOneField("value", "SiteConfig", "key='租房简介'"))</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="icon ti-mobile"></i></div>
+                        <div class="feature-text">
+                            <h2>贷款</h2>
+                            <p>@Html.Raw(DAL.DbHelperSQLite.GetOneField("value", "SiteConfig", "key='贷款简介'"))</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END .feature -->
+    <div class="copyrights">Collect from <a href="http://www.cssmoban.com/">手机网站模板</a></div>
+    <section class="grid-gallery">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <h2 class="section-heading">精品房源推荐</h2>
+                </div>
+            </div>
+
+            <div class="row gallery-row">
+
+                <div class="col-md-6 col-sm-6">
+                    <a href="images/img_1.jpg" class="img image-popup">
+                        <div class="overlay"></div>
+                        <div class="text">
+                            <h2>@Html.Raw(new DAL.House().GetModel(0, 1, " type='Sale' and JingPin='精品' ").Title)</h2>
+                            <p>@Html.Raw(new DAL.House().GetModel(0, 1, " type='Sale' and JingPin='精品' ").Detail)</p>
+                        </div>
+                        <img src="images/img_1.jpg" alt="Image" class="img-responsive">
+                    </a>
+                </div>
+
+                <div class="col-md-6 col-sm-6">
+                    <div class="row first-row">
+                        <div class="col-md-6 col-sm-6">
+                            <a href="images/img_2.jpg" class="img image-popup">
+                                <div class="overlay"></div>
+                                <div class="text">
+                                    <h2>@Html.Raw(new DAL.House().GetModel(1, 1, " type='Sale' and JingPin='精品' ").Title)</h2>
+                                    <p>@Html.Raw(new DAL.House().GetModel(1, 1, " type='Sale' and JingPin='精品' ").Detail)</p>
+                                </div>
+                                <img src="images/img_2.jpg" alt="Image" class="img-responsive">
+                            </a>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <a href="images/img_3.jpg" class="img image-popup">
+                                <div class="overlay"></div>
+                                <div class="text">
+                                    <h2>@Html.Raw(new DAL.House().GetModel(2, 1, " type='Sale' and JingPin='精品' ").Title)</h2>
+                                    <p>@Html.Raw(new DAL.House().GetModel(2, 1, " type='Sale' and JingPin='精品' ").Detail)</p>
+                                </div>
+                                <img src="images/img_3.jpg" alt="Image" class="img-responsive">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <a href="images/img_4.jpg" class="img image-popup">
+                                <div class="overlay"></div>
+                                <div class="text">
+                                    <h2>@Html.Raw(new DAL.House().GetModel(0, 1, " type='Sale' and JingPin='精品' ").Title)</h2>
+                                    <p>@Html.Raw(new DAL.House().GetModel(0, 1, " type='Sale' and JingPin='精品' ").Detail)</p>
+                                </div>
+                                <img src="images/img_4.jpg" alt="Image" class="img-responsive">
+                            </a>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <a href="images/img_5.jpg" class="img image-popup">
+                                <div class="overlay"></div>
+                                <div class="text">
+                                    <h2>@Html.Raw(new DAL.House().GetModel(1, 1, " type='Sale' and JingPin='精品' ").Title)</h2>
+                                    <p>@Html.Raw(new DAL.House().GetModel(1, 1, " type='Sale' and JingPin='精品' ").Detail)</p>
+                                </div>
+                                <img src="images/img_5.jpg" alt="Image" class="img-responsive">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Gallery Row -->
+            <div class="row gallery-row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="row first-row">
+                        <div class="col-md-6 col-sm-6">
+                            <a href="images/img_6.jpg" class="img image-popup">
+                                <div class="overlay"></div>
+                                <div class="text">
+                                    <h2>@Html.Raw(new DAL.House().GetModel(0, 1, " type='Rent' and JingPin='精品' ").Title)</h2>
+                                    <p>@Html.Raw(new DAL.House().GetModel(0, 1, " type='Rent' and JingPin='精品' ").Detail)</p>
+                                </div>
+                                <img src="images/img_6.jpg" alt="Image" class="img-responsive">
+                            </a>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <a href="images/img_7.jpg" class="img image-popup">
+                                <div class="overlay"></div>
+                                <div class="text">
+                                    <h2>@Html.Raw(new DAL.House().GetModel(0, 1, " type='Rent' and JingPin='精品' ").Title)</h2>
+                                    <p>@Html.Raw(new DAL.House().GetModel(0, 1, " type='Rent' and JingPin='精品' ").Detail)</p>
+                                </div>
+                                <img src="images/img_7.jpg" alt="Image" class="img-responsive">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <a href="images/img_8.jpg" class="img image-popup">
+                                <div class="overlay"></div>
+                                <div class="text">
+                                    <h2>@Html.Raw(new DAL.House().GetModel(0, 1, " type='Rent' and JingPin='精品' ").Title)</h2>
+                                    <p>@Html.Raw(new DAL.House().GetModel(0, 1, " type='Rent' and JingPin='精品' ").Detail)</p>
+                                </div>
+                                <img src="images/img_8.jpg" alt="Image" class="img-responsive">
+                            </a>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <a href="images/img_9.jpg" class="img image-popup">
+                                <div class="overlay"></div>
+                                <div class="text">
+                                    <h2>@Html.Raw(new DAL.House().GetModel(0, 1, " type='Rent' and JingPin='精品' ").Title)</h2>
+                                    <p>@Html.Raw(new DAL.House().GetModel(0, 1, " type='Rent' and JingPin='精品' ").Detail)</p>
+                                </div>
+                                <img src="images/img_9.jpg" alt="Image" class="img-responsive">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <a href="images/img_10.jpg" class="img image-popup">
+                        <div class="overlay"></div>
+                        <div class="text">
+                            <h2>@Html.Raw(new DAL.House().GetModel(0, 1, " type='Rent' and JingPin='精品' ").Title)</h2>
+                            <p>@Html.Raw(new DAL.House().GetModel(0, 1, " type='Rent' and JingPin='精品' ").Detail)</p>
+                        </div>
+                        <img src="images/img_10.jpg" alt="Image" class="img-responsive">
+                    </a>
+                </div>
+            </div>
+            <!-- Gallery Row -->
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div><a href="#" class="btn btn-primary">更 多 房 源</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

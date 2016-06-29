@@ -1,0 +1,41 @@
+﻿@{
+    Layout = "~/_SiteLayout.cshtml";
+    var title = DAL.DbHelperSQLite.GetOneField("value", "SiteConfig", "key='站点名称'");
+    Page.Title = title + "公司简介";
+    var column = new DAL.Article().GetModelList("Type='固定栏目'");
+    var id = Request["ID"];
+    if (id == null) { id = "1"; }
+    var article = new DAL.Article().GetModel(Convert.ToInt32(id));
+}
+
+<div id="fh5co-page-title" style="background-image: url(images/hero_2.jpg)">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="text">
+            <h1>@title</h1>
+        </div>
+    </div>
+</div>
+
+<main role="main" id="fh5co-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3" id="fh5co-sidebar">
+                <div class="fh5co-side-block">
+                    <h2></h2>
+                    <ul class="fh5co-links">
+                        @foreach (var c in column)
+                        {
+                            <li><a href="~/Company?ID=@c.ID">@c.Title</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8 col-md-push-1" id="fh5co-content">
+                <div class="row">
+                    <div class="col-md-12">@Html.Raw(article.Detail)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

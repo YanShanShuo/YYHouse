@@ -1,0 +1,102 @@
+﻿[
+  {
+    "TableName": "Article",
+    "column": [
+      {
+        "ColumnName": "ID",
+        "DataType": 2,
+        "Condition": "PRIMARY KEY autoincrement"
+      },
+      {
+        "ColumnName": "Title",
+        "DataType": 4,
+        "Condition": ""
+      },
+      {
+        "ColumnName": "Detail",
+        "DataType": 4,
+        "Condition": ""
+      },
+      {
+        "ColumnName": "Summary",
+        "DataType": 4,
+        "Condition": ""
+      },
+      {
+        "ColumnName": "Author",
+        "DataType": 4,
+        "Condition": ""
+      },
+      {
+        "ColumnName": "SubmitTime",
+        "DataType": 4,
+        "Condition": ""
+      },
+      {
+        "ColumnName": "UpdateTime",
+        "DataType": 4,
+        "Condition": ""
+      },
+      {
+        "ColumnName": "Type",
+        "DataType": 4,
+        "Condition": ""
+      },
+      {
+        "ColumnName": "Click",
+        "DataType": 4,
+        "Condition": ""
+      },
+      {
+        "ColumnName": "Order",
+        "DataType": 2,
+        "Condition": ""
+      }
+    ]
+  },
+  {
+    "TableName": "Pic",
+    "column": [
+      {
+        "ColumnName": "ID",
+        "DataType": 2,
+        "Condition": "PRIMARY KEY autoincrement"
+      },
+      {
+        "ColumnName": "ImageURL",
+        "DataType": 4,
+        "Condition": ""
+      },
+      {
+        "ColumnName": "AID",
+        "DataType": 4,
+        "Condition": ""
+      },
+      {
+        "ColumnName": "Type",
+        "DataType": 4,
+        "Condition": ""
+      },
+      {
+        "ColumnName": "Number",
+        "DataType": 4,
+        "Condition": ""
+      },
+      {
+        "ColumnName": "Title",
+        "DataType": 4,
+        "Condition": ""
+      },
+      {
+        "ColumnName": "Summary",
+        "DataType": 4,
+        "Condition": ""
+      },
+      {
+        "ColumnName": "Order",
+        "DataType": 2,
+        "Condition": ""
+      }
+    ]
+  }
+]
