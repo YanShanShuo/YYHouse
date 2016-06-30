@@ -1,23 +1,18 @@
 ﻿@{
     Layout = "~/_SiteLayout.cshtml";
     var title = DAL.DbHelperSQLite.GetOneField("value", "SiteConfig", "key='站点名称'");
-
-    Page.Title = title + "经纪人风采";
-    //Layout = "在此处显示布局页";
+    Page.Title = title + "店面介绍";
     //精品房源
     var jingpin = new DAL.House().GetModelList(" Type='Rent' and JingPin='精品' order by id desc");
+    var commany = new DAL.Company().GetModelList("");
 
-    //房源列表
-    var house = new DAL.House().GetModelList(" Type='Rent' Order by id desc ");
-
-    var agents = new DAL.Agent().GetModelList("");
-    
 }
+
 <div id="fh5co-page-title" style="background-image: url(images/hero_2.jpg)">
     <div class="overlay"></div>
     <div class="container">
         <div class="text">
-            <h1>@(title)经纪人风采</h1>
+            <h1>@(title)店面介绍</h1>
         </div>
     </div>
 </div>
@@ -40,23 +35,18 @@
                 </div>
             </div>
             <div class="col-md-9" id="fh5co-content">
-                @foreach (var a in agents)
+                @foreach (var c in commany)
                 {
-                    var xiaoqu = a.Xiaoqu.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
                     <div class="row fh5co-row" style="">
                         <div class="col-md-2">
                             <img src="images/agentd.jpg" style="width:100%;padding:0;margin:auto;" />
                         </div>
                         <div class="col-md-7" style="line-height:30px;">
-                            <h4 style="margin-top:10px;">@a.TrueName</h4>
-                            <span><strong>@a.Words</strong></span><br />
-                            <span class="broker-name">主营：
-                            @{ 
-                                foreach (var q in xiaoqu) {
-                                    @(q) @Html.Raw("&nbsp;")
-                                }
-                            }
+                            <h4 style="margin-top:10px;">@c.Name</h4>
+                            <span><strong>@c.Summary</strong></span><br />
+                            <span class="broker-name">
+                                @c.Address @c.Phone
                             </span>
                         </div>
                         <div class="col-md-3" style="vertical-align:middle;">
@@ -65,6 +55,20 @@
                     </div>
                 }
             </div>
+
+            <div id="pagination" class="fan_page">
+                <span class="page-index">首页</span>
+                <span class="page-index">上一页</span>
+                <span class="on"><a href="#">1</a></span>
+                <span class=""><a href="#">2</a></span>
+                <span class=""><a href="#">3</a></span>
+                <span class=""><a href="#">4</a></span>
+                <span class=""><a href="#">下一页</a></span>
+                <span class="page-index"><a href="#">尾页</a></span>
+            </div>
         </div>
+        
     </div>
+
+    
 </main>

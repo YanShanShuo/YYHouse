@@ -2,7 +2,9 @@
     Layout = "~/_SiteLayout.cshtml";
     var title = DAL.DbHelperSQLite.GetOneField("value", "SiteConfig", "key='站点名称'");
     Page.Title = title + "公司简介";
+    //左面显示的栏目
     var column = new DAL.Article().GetModelList("Type='固定栏目'");
+    //显示的文章主体
     var id = Request["ID"];
     if (id == null) { id = "1"; }
     var article = new DAL.Article().GetModel(Convert.ToInt32(id));

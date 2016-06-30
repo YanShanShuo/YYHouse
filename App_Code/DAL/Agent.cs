@@ -342,6 +342,42 @@ namespace DAL
             PageCount = (RowCount - 1) / pageSize + 1;
             return GetListByPage(where, orderby, startIndex, endIndex).Tables[0];
         }
+
+        public List<Model.Agent> GetModelListByPage(string where, string orderby, int pageIndex, int pageSize, ref int RowCount, ref int PageCount)
+        {
+            DataTable ds = GetListByPage(where, orderby, pageIndex, pageSize, ref RowCount, ref PageCount);
+            return DataTableToList(ds);
+        }
+
+        /// <summary>
+		/// 获得数据列表
+		/// </summary>
+		public List<Model.Agent> GetModelList(string strWhere)
+        {
+            DataSet ds = GetList(strWhere);
+            return DataTableToList(ds.Tables[0]);
+        }
+        /// <summary>
+        /// 获得数据列表
+        /// </summary>
+        public List<Model.Agent> DataTableToList(DataTable dt)
+        {
+            List<Model.Agent> modelList = new List<Model.Agent>();
+            int rowsCount = dt.Rows.Count;
+            if (rowsCount > 0)
+            {
+                Model.Agent model;
+                for (int n = 0; n < rowsCount; n++)
+                {
+                    model = DataRowToModel(dt.Rows[n]);
+                    if (model != null)
+                    {
+                        modelList.Add(model);
+                    }
+                }
+            }
+            return modelList;
+        }
         #endregion  ExtensionMethod
     }
 }
