@@ -1447,8 +1447,12 @@ a > img.fh5co-align-center {
 
 /*# sourceMappingURL=style.css.map */
 .fan_page { margin:75px 0 25px 0; float:right; }
-.fan_page span { border:1px solid #d2d2d2; margin:0px 3px; padding:10px; display:inline-block; }
+/*..fan_page span { border:1px solid #d2d2d2; margin:0px 3px; padding:10px; display:inline-block; }
 .fan_page span.page-index { color:#d2d2d2; }
 .fan_page span a { color:#717171; padding:0 4px; text-decoration:none; }
 .fan_page .on { background:#81c141; }
-.fan_page .on a { color:#fff; }
+.fan_page .on a { color:#fff; }*/
+.fan_page a span { padding:0 4px;}
+.fan_page a { color:#717171;display:inline-block;border:1px solid #d2d2d2; margin:0px 3px;padding:10px; text-decoration:none;}
+ .fan_page .on { background:#81c141; }
+.fan_page .on span { color:#fff; }
