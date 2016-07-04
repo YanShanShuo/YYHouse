@@ -4,15 +4,14 @@
     Page.Title = title + "店面介绍";
     //精品房源
     var jingpin = new DAL.House().GetModelList(" Type='Rent' and JingPin='精品' order by id desc");
-    var commany = new DAL.Company().GetModelList("");
-
-    int p = Convert.ToInt32(Request["p"]);
-
+    
+    int p = Convert.ToInt32(Request["p"]);//pageindex
+    int pagesize = 10;
     int rowcount = 0;
     int pagecount = 0;
-    var store = new DAL.Company().GetModelListByPage("", " id desc", 1, 1, ref rowcount, ref pagecount);
+    var store = new DAL.Company().GetModelListByPage("", " id desc", p, pagesize, ref rowcount, ref pagecount);
     if (p == 0) { p = 1; }
-    var aa = Common.PageInfo(1, 10, p, "/Store?");
+    var aa = Common.PageInfo(rowcount, pagesize, p, "/Store?");
 }
 
 <div id="fh5co-page-title" style="background-image: url(images/hero_2.jpg)">
@@ -25,7 +24,6 @@
 </div>
 
 <main role="main" id="fh5co-main">
-
     <div class="container">
         <div class="row">
             <div class="col-md-3" id="fh5co-sidebar">
@@ -43,7 +41,7 @@
                 </div>
             </div>
             <div class="col-md-9" id="fh5co-content">
-                @foreach (var c in commany)
+                @foreach (var c in store)
                 {
 
                     <div class="row fh5co-row" style="">
