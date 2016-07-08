@@ -7,11 +7,20 @@
     //精品房源
     var jingpin = new DAL.House().GetModelList(" Type='Rent' and JingPin='精品' order by id desc");
 
-    //房源列表
-    var house = new DAL.House().GetModelList(" Type='Rent' Order by id desc ");
 
-    var agents = new DAL.Agent().GetModelList("");
-    
+
+    //房源列表
+    //var house = new DAL.House().GetModelList(" Type='Rent' Order by id desc ");
+
+    //var agents = new DAL.Agent().GetModelList("");
+
+    int p = Convert.ToInt32(Request["p"]);
+    int pagesize = 1;
+    int rowcount = 0;
+    int pagecount = 0;
+    var agents = new DAL.Agent().GetModelListByPage("", "", p, pagesize, ref rowcount, ref pagecount);
+    if (p == 0) { p = 1; }
+    var aa = Common.PageInfo(rowcount, pagesize, p, "/Agent?");
 }
 <div id="fh5co-page-title" style="background-image: url(images/hero_2.jpg)">
     <div class="overlay"></div>
@@ -51,19 +60,24 @@
                         <div class="col-md-7" style="line-height:30px;">
                             <h4 style="margin-top:10px;">@a.TrueName</h4>
                             <span><strong>@a.Words</strong></span><br />
-                            <span class="broker-name">主营：
-                            @{ 
-                                foreach (var q in xiaoqu) {
-                                    @(q) @Html.Raw("&nbsp;")
+                            <span class="broker-name">
+                                主营：
+                                @{
+                                    foreach (var q in xiaoqu)
+                                    {
+                                        @(q) @Html.Raw("&nbsp;")
+                                    }
                                 }
-                            }
                             </span>
                         </div>
                         <div class="col-md-3" style="vertical-align:middle;">
                             <span style="font-size:30px;color:#81c141;line-height:135px;">17769018325</span>
                         </div>
                     </div>
-                }
+                                    }
+            </div>
+            <div id="pagination" class="fan_page">
+                @Html.Raw(aa)
             </div>
         </div>
     </div>

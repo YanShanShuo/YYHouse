@@ -6,7 +6,14 @@
     //精品房源
     var jingpin = new DAL.House().GetModelList(" Type='Sale' and JingPin='精品' order by id desc");
     //房源列表
-    var house = new DAL.House().GetModelList(" Type='Sale' Order by id desc ");
+    //var house = new DAL.House().GetModelList(" Type='Sale' Order by id desc ");
+    int p = Convert.ToInt32(Request["p"]);//pageindex
+    int pagesize = 10;
+    int rowcount = 0;
+    int pagecount = 0;
+    var house = new DAL.House().GetModelListByPage("Type='Sale'", " id desc", p, pagesize, ref rowcount, ref pagecount);
+    if (p == 0) { p = 1; }
+    var aa = Common.PageInfo(rowcount, pagesize, p, "/Sale?");
 }
 <div id="fh5co-page-title" style="background-image: url(images/hero_2.jpg)">
     <div class="overlay"></div>
@@ -20,7 +27,7 @@
 <main role="main" id="fh5co-main">
     <div class="container">
         <div class="row">
-            <div class="col-md-3" id="fh5co-sidebar">
+            <div class="col-md-3 hidden-xs" id="fh5co-sidebar">
                 <div class="fh5co-side-block" style="border:solid 1px #ccc;border-radius:4px;padding:10px 10px;">
                     <h2>精品房源</h2>
                     <div>
@@ -51,7 +58,9 @@
                         </div>
                     </div>
                 }
-
+            </div>
+            <div id="pagination" class="fan_page hidden-xs">
+                @Html.Raw(aa)
             </div>
         </div>
     </div>

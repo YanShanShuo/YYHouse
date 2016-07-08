@@ -231,27 +231,24 @@ namespace DAL
         /// <summary>
         /// 分页获取数据列表
         /// </summary>
-        public DataSet GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
+        public DataSet GetListByPage(string strWhere, string orderby, int startIndex, int count)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("SELECT * FROM ( ");
-            strSql.Append(" SELECT ROW_NUMBER() OVER (");
-            if (!string.IsNullOrEmpty(orderby.Trim()))
-            {
-                strSql.Append("order by T." + orderby);
-            }
+            strSql.Append("Select * from SiteConfig");
+            if (strWhere != "")
+                strSql.Append(" where " + strWhere);
+            if (orderby != "")
+                strSql.Append(" order by " + orderby);
             else
-            {
-                strSql.Append("order by T.ID desc");
-            }
-            strSql.Append(")AS Row, T.*  from SiteConfig T ");
-            if (!string.IsNullOrEmpty(strWhere.Trim()))
-            {
-                strSql.Append(" WHERE " + strWhere);
-            }
-            strSql.Append(" ) TT");
-            strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
-            return DbHelperSQLite.Query(strSql.ToString());
+                strSql.Append(" order by id desc");
+            strSql.Append(" Limit @index,@count");
+            SQLiteParameter[] parameters = {
+                new SQLiteParameter("@index",DbType.Int32),
+                new SQLiteParameter("@count", DbType.Int32)
+            };
+            parameters[0].Value = startIndex;
+            parameters[1].Value = count;
+            return DbHelperSQLite.Query(strSql.ToString(),parameters);
         }
 
         #endregion  BasicMethod
@@ -268,8 +265,7 @@ namespace DAL
         /// <returns></returns>
         public DataTable GetListByPage(string where, string orderby, int pageIndex, int pageSize, ref int RowCount, ref int PageCount)
         {
-            int startIndex = (pageIndex - 1) * pageSize + 1;
-            int endIndex = pageIndex * pageSize;
+            int startIndex = (pageIndex - 1) * pageSize;
             RowCount = GetRecordCount(where);
             if (RowCount == 0)
             {
@@ -277,7 +273,42 @@ namespace DAL
                 return new DataTable();
             }
             PageCount = (RowCount - 1) / pageSize + 1;
-            return GetListByPage(where, orderby, startIndex, endIndex).Tables[0];
+            return GetListByPage(where, orderby, startIndex, pageSize).Tables[0];
+        }
+
+        /// <summary>
+		/// 获得数据列表
+		/// </summary>
+		public List<Model.SiteConfig> GetModelList(string strWhere)
+        {
+            DataSet ds = GetList(strWhere);
+            return DataTableToList(ds.Tables[0]);
+        }
+        /// <summary>
+        /// 获得数据列表
+        /// </summary>
+        public List<Model.SiteConfig> DataTableToList(DataTable dt)
+        {
+            List<Model.SiteConfig> modelList = new List<Model.SiteConfig>();
+            int rowsCount = dt.Rows.Count;
+            if (rowsCount > 0)
+            {
+                Model.SiteConfig model;
+                for (int n = 0; n < rowsCount; n++)
+                {
+                    model = DataRowToModel(dt.Rows[n]);
+                    if (model != null)
+                    {
+                        modelList.Add(model);
+                    }
+                }
+            }
+            return modelList;
+        }
+        public List<Model.SiteConfig> GetModelListByPage(string where, string orderby, int pageIndex, int pageSize, ref int RowCount, ref int PageCount)
+        {
+            DataTable ds = GetListByPage(where, orderby, pageIndex, pageSize, ref RowCount, ref PageCount);
+            return DataTableToList(ds);
         }
         #endregion  ExtensionMethod
     }
