@@ -180,6 +180,8 @@ namespace DAL
         }
 
 
+
+
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
@@ -238,7 +240,7 @@ namespace DAL
             {
                 strSql.Append(" where " + strWhere);
             }
-            object obj =DAL.DbHelperSQLite.GetSingle(strSql.ToString());
+            object obj = DAL.DbHelperSQLite.GetSingle(strSql.ToString());
             if (obj == null)
             {
                 return 0;
@@ -268,7 +270,7 @@ namespace DAL
             };
             parameters[0].Value = startIndex;
             parameters[1].Value = count;
-            return DbHelperSQLite.Query(strSql.ToString(),parameters);
+            return DbHelperSQLite.Query(strSql.ToString(), parameters);
         }
 
 
@@ -331,6 +333,28 @@ namespace DAL
         {
             DataTable ds = GetListByPage(where, orderby, pageIndex, pageSize, ref RowCount, ref PageCount);
             return DataTableToList(ds);
+        }
+
+        /// <summary>
+        /// 得到实体对象
+        /// </summary>
+        /// <param name="where"></param>
+        /// <returns></returns>
+        public Model.Admin GetModel(string where)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select * from Admin ");
+            if (where != "") strSql.Append(" where " + where);
+            Model.Admin model = new Model.Admin();
+            DataSet ds = DbHelperSQLite.Query(strSql.ToString());
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return DataRowToModel(ds.Tables[0].Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
         }
         #endregion  ExtensionMethod
     }
