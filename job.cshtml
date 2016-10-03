@@ -1,7 +1,8 @@
 ﻿@{
-    Page.Title = "在此处显示标题";
+
     Layout = "_SiteLayout.cshtml";
     var title = DAL.DbHelperSQLite.GetOneField("value", "SiteConfig", "key='站点名称'");
+    Page.Title = title + "招聘信息";
     var column = new DAL.Article().GetModelList("Type='固定栏目' and title='诚聘英才'");
     var article = new DAL.Article().GetModel(column[0].ID);
 }
