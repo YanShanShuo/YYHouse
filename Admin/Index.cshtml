@@ -1,0 +1,12 @@
+﻿@{
+    Page.Title = "在此处显示标题";
+    Layout = "_LayoutAdmin.cshtml";
+    string art = DAL.DbHelperSQLite.GetOneField("Detail", "Article", "Type='固定栏目' and Title='公司简介'");
+}
+
+<div style="text-align:center;font-size:20px;font-weight:bold">
+    公司简介
+</div>
+<div style="padding:20px;">
+    @Html.Raw(art)
+</div>

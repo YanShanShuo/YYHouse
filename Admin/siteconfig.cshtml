@@ -1,0 +1,63 @@
+﻿@{
+    Page.Validation = false;
+
+    Page.Title = "站点设置修改";
+    Layout = "_LayoutAdmin.cshtml";
+    var rawComment = Request.Unvalidated().Form["comment"];
+    DAL.SiteConfig db = new DAL.SiteConfig();
+    List<Model.SiteConfig> cs = db.GetModelList("");
+    if (Request.HttpMethod == "POST" && Validation.IsValid())
+    {
+        foreach (Model.SiteConfig s in cs)
+        {
+            if (Request[s.Key] != null)
+            {
+                s.Value = Request[s.Key];
+                db.Update(s);
+            }
+        }
+    }
+    cs = db.GetModelList("");
+}
+<div style="text-align:center;font-size:20px;font-weight:bold">
+    站点设置
+</div>
+<div>
+    <form id="comment" name="comment" class="am-form" method="post">
+        @{
+            foreach (Model.SiteConfig s in cs)
+            {
+                <div class="am-g am-margin-top">
+                    <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                        @s.Key
+                    </div>
+                    <div class="am-u-sm-8 am-u-md-4">
+                        <input name="@s.Key" type="text" class="am-input-sm" value="@s.Value.Replace("←","<")" data="site">
+                    </div>
+                    <div class="am-hide-sm-only am-u-md-6">&nbsp;</div>
+                </div>
+            }
+        }
+
+        <div class="am-g am-margin-top">
+            <div class="am-u-sm-4 am-u-md-2 am-text-right">&nbsp;</div>
+            <div class="am-u-sm-8 am-u-md-4">
+                <button type="submit" class="am-btn am-btn-primary am-btn-xs">提交保存</button>
+                <button type="button" class="am-btn am-btn-primary am-btn-xs">放弃保存</button>
+            </div>
+            <div class="am-u-sm-12 am-u-md-6"></div>
+        </div>
+    </form>
+    @section pageScript{
+        <script>
+            $(function () {
+                $('#comment').on('submit', function () {
+                    $.each($('input[data=site]'), function (i, n) {
+                        $(this).val($(this).val().replace(/</g, "←"));
+                    });
+                });
+               
+            });
+        </script>
+    }
+</div>
