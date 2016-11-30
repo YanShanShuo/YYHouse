@@ -41,7 +41,7 @@ namespace DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into Article(");
-            strSql.Append("Title,Detail,Summary,Author,SubmitTime,UpdateTime,Type,Click,Order)");
+            strSql.Append("Title,Detail,Summary,Author,SubmitTime,UpdateTime,Type,Click,[Order])");
             strSql.Append(" values (");
             strSql.Append("@Title,@Detail,@Summary,@Author,@SubmitTime,@UpdateTime,@Type,@Click,@Order)");
             strSql.Append(";select LAST_INSERT_ROWID()");
@@ -90,7 +90,7 @@ namespace DAL
             strSql.Append("UpdateTime=@UpdateTime,");
             strSql.Append("Type=@Type,");
             strSql.Append("Click=@Click,");
-            strSql.Append("Order=@Order");
+            strSql.Append("[Order]=@Order");
             strSql.Append(" where ID=@ID");
             SQLiteParameter[] parameters = {
                     new SQLiteParameter("@Title", DbType.String),

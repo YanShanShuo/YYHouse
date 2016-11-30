@@ -34,7 +34,7 @@
                         <div class="feature-icon"><i class="icon ti-gift"></i></div>
                         <div class="feature-text">
                             <h2>买房</h2>
-                            <p>@Html.Raw(DAL.DbHelperSQLite.GetOneField("value", "SiteConfig", "key='买房简介'"))</p>
+                            <p>@Html.Raw(HttpUtility.UrlDecode(DAL.DbHelperSQLite.GetOneField("value", "SiteConfig", "key='买房简介'")))</p>
                         </div>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                         <div class="feature-icon"><i class="icon ti-heart"></i></div>
                         <div class="feature-text">
                             <h2>租房</h2>
-                            <p>@Html.Raw(DAL.DbHelperSQLite.GetOneField("value", "SiteConfig", "key='租房简介'"))</p>
+                            <p>@Html.Raw(HttpUtility.UrlDecode(DAL.DbHelperSQLite.GetOneField("value", "SiteConfig", "key='租房简介'")))</p>
                         </div>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                         <div class="feature-icon"><i class="icon ti-mobile"></i></div>
                         <div class="feature-text">
                             <h2>贷款</h2>
-                            <p>@Html.Raw(DAL.DbHelperSQLite.GetOneField("value", "SiteConfig", "key='贷款简介'"))</p>
+                            <p>@Html.Raw(HttpUtility.UrlDecode(DAL.DbHelperSQLite.GetOneField("value", "SiteConfig", "key='贷款简介'")))</p>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,108 @@
+﻿@{
+    Page.Title = "文章编辑";
+    Layout = "_LayoutAdmin.cshtml";
+    //显示的文章主体
+    var id = Request["ID"];
+    if (id == null) { id = "1"; }
+    var a = new DAL.Article().GetModel(Convert.ToInt32(id));
+
+    if (IsPost)
+    {
+        a.Author = Request["txtAuthor"];
+        a.Detail = Request["txtDetail"];
+        a.Click = Request["txtClick"];
+        if (a.Type != "固定栏目")
+        {
+            a.Title = Request["txtTitle"];
+            a.Type = Request["txtType"];
+        }
+        bool b = new DAL.Article().Update(a);
+        if (b)
+        {
+            Response.Write("<script>alert('保存成功');</script>");
+        }
+    }
+}
+
+<div style="text-align:center;font-size:20px;font-weight:bold">
+    @Page.Title
+</div>
+<div>
+    <form id="comment" name="comment" class="am-form" method="post">
+        <input type="hidden" name="ID" value="@id" />
+        <div class="am-g am-margin-top">
+            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                标题：
+            </div>
+            <div class="am-u-sm-8 am-u-md-4">
+                <input name="txtTitle" type="text" class="am-input-sm" value="@a.Title" data="site" @(a.Type == "固定栏目" ? "readonly='readonly'" : "")>
+            </div>
+            <div class="am-hide-sm-only am-u-md-6">&nbsp;</div>
+        </div>
+        <div class="am-g am-margin-top">
+            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                详细：
+            </div>
+            <div class="am-u-sm-8 am-u-md-10">
+                <div id="txtDetail" style="height:600px;">
+                    @Html.Raw(HttpUtility.UrlDecode(a.Detail))
+                </div>
+                <input type="hidden" name="txtDetail" id="txtDetailValue" />
+            </div>
+
+        </div>
+        <div class="am-g am-margin-top">
+            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                作者：
+            </div>
+            <div class="am-u-sm-8 am-u-md-4">
+                <input name="txtAuthor" type="text" class="am-input-sm" value="@a.Author" data="site">
+            </div>
+            <div class="am-hide-sm-only am-u-md-6">&nbsp;</div>
+        </div>
+        <div class="am-g am-margin-top">
+            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                类型：
+            </div>
+            <div class="am-u-sm-8 am-u-md-4">
+                <input name="txtType" type="text" class="am-input-sm" value="@a.Type" data="site" @(a.Type == "固定栏目" ? "readonly='readonly'" : "")>
+            </div>
+            <div class="am-hide-sm-only am-u-md-6">&nbsp;</div>
+        </div>
+        <div class="am-g am-margin-top">
+            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                点击量：
+            </div>
+            <div class="am-u-sm-8 am-u-md-4">
+                <input name="txtClick" type="number" class="am-input-sm" value="@a.Click" data="site">
+            </div>
+            <div class="am-hide-sm-only am-u-md-6">&nbsp;</div>
+        </div>
+        <div class="am-g am-margin-top">
+            <div class="am-u-sm-4 am-u-md-2 am-text-right">&nbsp;</div>
+            <div class="am-u-sm-8 am-u-md-4">
+                <button type="submit" class="am-btn am-btn-primary am-btn-xs">提交保存</button>
+                <button type="button" class="am-btn am-btn-primary am-btn-xs">放弃保存</button>
+            </div>
+            <div class="am-u-sm-12 am-u-md-6"></div>
+        </div>
+    </form>
+</div>
+@section pageScript{
+    <script type="text/javascript">
+        $(function () {
+            var editor = new wangEditor('txtDetail');
+            editor.config.uploadImgUrl = "/Upload/Img";
+            editor.config.uploadImgFileName = 'ImgFile'
+            editor.create();
+            editor.onchange = function () {
+                // 编辑区域内容变化时，实时打印出当前内容
+                //console.log(this.$txt.html());
+                $('#txtDetailValue').val(this.$txt.html().replace(/</g, "%3C").replace(/>/g, "%3E"));
+            };
+            $('#comment').on('submit', function () {
+                $('#txtDetailValue').val(editor.$txt.html().replace(/</g, "%3C").replace(/>/g, "%3E"));
+            });
+        });
+    </script>
+}

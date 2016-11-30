@@ -80,4 +80,83 @@ public class Common
         pageinfo += LastPage;
         return pageinfo;
     }
+
+    /// <summary>
+    /// 获取随机字符
+    /// 字符从0-9，A-Z随机产生
+    /// </summary>
+    /// <returns></returns>
+    public static string GetMix(SuiJiType type, int length)
+    {
+        string suijistr = @"0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ";
+        int number;
+        string strCode = string.Empty;
+        //随机数种子  
+        Random radom = new Random();
+
+        int i1 = 0;
+        int i2 = 0;
+        switch (type)
+        {
+            case SuiJiType.Number:
+                i1 = 0;
+                i2 = 10;
+                break;
+            case SuiJiType.Lowercase_letters:
+                i1 = 10; i2 = 26;
+                break;
+            case SuiJiType.Capital_letters:
+                i1 = 36; i2 = 26;
+                break;
+            case SuiJiType.HunHe1:
+                i1 = 10; i2 = 52;
+                break;
+            case SuiJiType.HunHe2:
+                i1 = 0; i2 = 36;
+                break;
+            case SuiJiType.HunHe3:
+                i1 = 0; i2 = 61;
+                break;
+        }
+        for (int i = 0; i < length; i++)
+        {
+            //随机的整数  
+            number = radom.Next();
+            strCode += suijistr.Substring(i1 + new Random(number).Next(i2), 1);
+        }
+        if (type == SuiJiType.HunHe3) strCode = strCode.ToUpper();
+        return strCode;
+    }
+}
+public enum SuiJiType : int
+{
+    /// <summary>
+    /// 数字
+    /// </summary>
+    Number = 1,
+    /// <summary>
+    /// 小写字母
+    /// </summary>
+    Lowercase_letters = 2,
+    /// <summary>
+    /// 大写字母
+    /// </summary>
+    Capital_letters = 3,
+    /// <summary>
+    /// 返回大小写字母混合
+    /// </summary>
+    HunHe1 = 4,
+    /// <summary>
+    /// 返回小写字母和数字混合
+    /// </summary>
+    HunHe2 = 5,
+    /// <summary>
+    /// 返回大写字母和数字混合
+    /// </summary>
+    HunHe3 = 6,
+    /// <summary>
+    /// 返回大小写字母和数字混合
+    /// </summary>
+    HunHe4 = 7,
+
 }

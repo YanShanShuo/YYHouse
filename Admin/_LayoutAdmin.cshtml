@@ -1,6 +1,6 @@
 ﻿@{
     var title = DAL.DbHelperSQLite.GetOneField("value", "SiteConfig", "key='站点名称'");
-    Page.Title = title;
+    //Page.Title = title;
 
 }
 
@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Amaze UI Admin index Examples</title>
+    <title>@(title)后台管理-@(Page.Title)</title>
     <meta name="description" content="这是一个 index 页面">
     <meta name="keywords" content="index">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,6 +20,7 @@
     <meta name="apple-mobile-web-app-title" content="Amaze UI" />
     <link rel="stylesheet" href="AmazeUI/assets/css/amazeui.min.css" />
     <link rel="stylesheet" href="AmazeUI/assets/css/admin.css">
+    <link href="~/Content/wangEditor/dist/css/wangEditor.min.css" rel="stylesheet" />
 </head>
 <body>
     <!--[if lte IE 9]>
@@ -29,7 +30,7 @@
 
     <header class="am-topbar am-topbar-inverse admin-header">
         <div class="am-topbar-brand">
-            <strong>Amaze UI</strong> <small>后台管理模板</small>
+            <strong>@(title)后台管理</strong> <small>-@(Page.Title)</small>
         </div>
 
         <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
@@ -60,11 +61,11 @@
                 <ul class="am-list admin-sidebar-list">
                     <li class="admin-parent">
                         <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}">
-                            <span class="am-icon-book"></span> 站点设置 <span class="am-icon-angle-right am-fr am-margin-right"></span>
+                            <span class="am-icon-book"></span> 编辑信息 <span class="am-icon-angle-right am-fr am-margin-right"></span>
                         </a>
                         <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-nav">
                             <li><a href="siteconfig" class="am-cf"> 站点设置 </a></li>
-                            <li><a href="admin-user.html" class="am-cf"> 个人资料 </a></li>
+                            <li><a href="article_guding" class="am-cf"> 固定栏目 </a></li>
                             <li><a href="admin-user.html" class="am-cf"> 个人资料 </a></li>
                             <li><a href="admin-user.html" class="am-cf"> 个人资料 </a></li>
                             <li><a href="admin-user.html" class="am-cf"> 个人资料 </a></li>
@@ -119,6 +120,7 @@
     <!--<![endif]-->
     <script src="AmazeUI/assets/js/amazeui.min.js"></script>
     <script src="AmazeUI/assets/js/app.js"></script>
+    <script src="~/Content/wangEditor/dist/js/wangEditor.min.js"></script>
     @RenderSection("pageScript", false)
 </body>
 </html>

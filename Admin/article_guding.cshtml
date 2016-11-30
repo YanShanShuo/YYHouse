@@ -1,0 +1,57 @@
+﻿@{
+    Page.Title = "固定栏目";
+    Layout = "_LayoutAdmin.cshtml";
+    DAL.Article db = new DAL.Article();
+    List<Model.Article> list = db.GetModelList("Type='固定栏目'");
+
+}
+<div style="text-align:center;font-size:20px;font-weight:bold">
+    固定栏目
+</div>
+<div class="am-g">
+    <div class="am-u-sm-12">
+        <form class="am-form">
+            <table class="am-table am-table-striped am-table-hover table-main">
+                <thead>
+                    <tr>
+                        <th class="table-check"><input type="checkbox" /></th>
+                        <th class="table-id">ID</th>
+                        <th class="table-title">标题</th>
+                        <th class="table-date am-hide-sm-only">修改日期</th>
+                        <th class="table-set">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (Model.Article a in list)
+                        {
+                            <tr>
+                                <td><input type="checkbox" /></td>
+                                <td>@a.ID</td>
+                                <td>@a.Title</td>
+                                <td class="am-hide-sm-only">@a.UpdateTime</td>
+                                <td>
+                                    <div class="am-btn-toolbar">
+                                        <div class="am-btn-group am-btn-group-xs">
+                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary" data="@a.ID" name="edit" type="button"><span class="am-icon-pencil-square-o"></span>编辑</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+@section pageScript{
+    <script>
+            $(function () {
+                $('button[name=edit]').on('click', function () {
+                    //alert('编辑');
+                    location.href = "article_edit?id="+$(this).attr('data');
+                });
+            });
+    </script>
+}

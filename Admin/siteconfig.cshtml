@@ -3,7 +3,6 @@
 
     Page.Title = "站点设置修改";
     Layout = "_LayoutAdmin.cshtml";
-    var rawComment = Request.Unvalidated().Form["comment"];
     DAL.SiteConfig db = new DAL.SiteConfig();
     List<Model.SiteConfig> cs = db.GetModelList("");
     if (Request.HttpMethod == "POST" && Validation.IsValid())
@@ -32,7 +31,7 @@
                         @s.Key
                     </div>
                     <div class="am-u-sm-8 am-u-md-4">
-                        <input name="@s.Key" type="text" class="am-input-sm" value="@s.Value.Replace("←","<")" data="site">
+                        <input name="@s.Key" type="text" class="am-input-sm" value="@HttpUtility.UrlDecode(s.Value)" data="site">
                     </div>
                     <div class="am-hide-sm-only am-u-md-6">&nbsp;</div>
                 </div>
@@ -53,7 +52,7 @@
             $(function () {
                 $('#comment').on('submit', function () {
                     $.each($('input[data=site]'), function (i, n) {
-                        $(this).val($(this).val().replace(/</g, "←"));
+                        $(this).val($(this).val().replace(/</g, "%3C").replace(/>/g, "%3E"));
                     });
                 });
                

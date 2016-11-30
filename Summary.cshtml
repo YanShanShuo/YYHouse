@@ -35,7 +35,7 @@
             </div>
             <div class="col-md-8 col-md-push-1" id="fh5co-content">
                 <div class="row">
-                    <div class="col-md-12">@Html.Raw(article.Detail)</div>
+                    <div class="col-md-12">@Html.Raw(HttpUtility.UrlDecode(article.Detail))</div>
                 </div>
             </div>
         </div>

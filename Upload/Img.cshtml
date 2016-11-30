@@ -1,0 +1,39 @@
+﻿@{
+    Page.Title = "图片上传";
+    //Layout = "在此处显示布局页";
+    if (Request.Files.Count > 0)
+    {
+        string p1 = DateTime.Now.ToString("yyyyMMdd") + "/";
+        string serverpath = "/Upload/Img/" + p1;
+        string path = Server.MapPath("~/Upload/Img/");  //存储图片的文件夹
+        if (!Directory.Exists(path + p1))
+        {
+            Directory.CreateDirectory(path);
+        }
+
+        string originalFileName = Request.Files[0].FileName;
+        string fileExtension = originalFileName.Substring(originalFileName.LastIndexOf('.'), originalFileName.Length - originalFileName.LastIndexOf('.'));
+
+        string currentFileName = DateTime.Now.ToString("HHmmssfff") + Common.GetMix(SuiJiType.Number, 4) + fileExtension;
+
+
+        //生成文件路径
+        string imagePath = path + p1 + currentFileName;
+        //保存文件
+        Request.Files[0].SaveAs(imagePath);
+
+
+        //获取图片url地址
+        string imgUrl = serverpath + currentFileName;
+
+        //返回图片url地址
+        Response.Write(imgUrl);
+        return;
+    }
+    else
+    {
+        Response.Write("error|file is null");
+        return;
+    }
+
+}
