@@ -66,13 +66,20 @@
                         <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-nav">
                             <li><a href="siteconfig" class="am-cf"> 站点设置 </a></li>
                             <li><a href="article_guding" class="am-cf"> 固定栏目 </a></li>
-                            <li><a href="admin-user.html" class="am-cf"> 个人资料 </a></li>
-                            <li><a href="admin-user.html" class="am-cf"> 个人资料 </a></li>
-                            <li><a href="admin-user.html" class="am-cf"> 个人资料 </a></li>
-                            <li><a href="admin-user.html" class="am-cf"> 个人资料 </a></li>
                         </ul>
                     </li>
-                    <li><a href="admin-table.html"><span class="am-icon-table"></span> 表格</a></li>
+                    <li class="admin-parent">
+                        <a class="am-cf" data-am-collapse="{target: '#collapse-nav2'}">
+                            <span class="am-icon-book"></span> 房源信息 <span class="am-icon-angle-right am-fr am-margin-right"></span>
+                        </a>
+                        <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-nav2">
+                            <li><a href="~/Admin/House/sale_list" class="am-cf"> 出租房源 </a></li>
+                            <li><a href="~/Admin/House/sale_list" class="am-cf"> 出售房源 </a></li>
+                            <li><a href="~/Admin/House/rent_list" class="am-cf"> 求购房源 </a></li>
+                            <li><a href="article_guding" class="am-cf"> 求租房源 </a></li>
+                        </ul>
+                    </li>
+                    <li><a href="admin-table.html"><span class="am-icon-table"></span> 房源 </a></li>
                     <li><a href="admin-form.html"><span class="am-icon-pencil-square-o"></span> 表单</a></li>
                     <li><a href="#"><span class="am-icon-sign-out"></span> 注销</a></li>
                 </ul>

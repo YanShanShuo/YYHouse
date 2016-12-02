@@ -16,8 +16,11 @@ namespace DAL
     /// </summary>
     public partial class Admin
     {
+        
         public Admin()
-        { }
+        {
+            
+        }
         #region  BasicMethod
 
         /// <summary>

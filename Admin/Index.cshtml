@@ -8,5 +8,5 @@
     公司简介
 </div>
 <div style="padding:20px;">
-    @Html.Raw(art)
+    @Html.Raw(HttpUtility.UrlDecode(art))
 </div>
